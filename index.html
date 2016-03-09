@@ -4,6 +4,7 @@
 
 <script src="https://netpie.io/microgear.js"></script>
 <script src="js/responsivevoice.js"></script>
+<script src="js/qrcode/qrcode.js"></script>
 
 <style>
 body {
@@ -13,6 +14,7 @@ body {
 
 	#displays,#qrcode{
     	display:none;
+		text-align: -webkit-center;
     }
 	
 	#nplayer,#countdown{
@@ -39,7 +41,7 @@ body {
     <div id="checkNumber"></div>
 </div>
 </p>
-<div id="qrcode"><p>Scan QR Code</p><img src="img/qrcode-bingo.png"/></div>
+<div id="qrcode"><p>Scan QR Code</p><div id="qrcode-img"></div></div>
 
 <script>
 	var getParameters = function () {
@@ -59,13 +61,29 @@ body {
 	  }
 	  return parameters_string;
 	}();
-	if(typeof getParameters.appid === "string" && typeof getParameters.auth === "string"){
+
+	function makeCode (urlText) {
+		var sizeQR = 200;
+		var qrcode = new QRCode(document.getElementById("qrcode-img"), {
+			width : sizeQR,
+			height : sizeQR
+		});	
+				
+		if (!urlText) {
+			console.log("cannot generate qr code, url is null.");
+			return;
+		}
+		qrcode.makeCode(urlText);
+	}
+
+	if(typeof getParameters.appid === "string" && getParameters.appid.length>0 && typeof getParameters.auth === "string" && getParameters.auth.length>0 ){
 		var authString = getParameters.auth.split(':');
 		const APPID = getParameters.appid;
 		const APPKEY = authString[0];
 		const APPSECRET = authString[1];
+		makeCode(window.location.origin+window.location.pathname.replace("index","client")+"?appid="+APPID+"&auth="+APPKEY+":"+APPSECRET);
 	}else{
-		document.getElementById("nplayer").innerHTML = 'appid or auth invalid<br>'+window.location.pathname+'?appid=APPID&auth=KEY:SECRET';
+		document.getElementById("nplayer").innerHTML = 'appid or auth invalid<br>'+window.location.origin+window.location.pathname+'?appid=APPID&auth=KEY:SECRET';
 	}
 
 	var microgear = Microgear.create({

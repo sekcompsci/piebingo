@@ -79,7 +79,7 @@ BINGO GAME
 
 		var playername = prompt("Please enter your name", "");
 	}else{
-		document.getElementById("checkNumber").innerHTML = 'appid or auth invalid<br>'+window.location.pathname+'?appid=APPID&auth=KEY:SECRET';
+		document.getElementById("checkNumber").innerHTML = 'appid or auth invalid<br>'+window.location.origin+window.location.pathname+'?appid=APPID&auth=KEY:SECRET';
 	}
 
 	var microgear = Microgear.create({
