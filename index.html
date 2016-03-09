@@ -81,9 +81,9 @@ body {
 		const APPID = getParameters.appid;
 		const APPKEY = authString[0];
 		const APPSECRET = authString[1];
-		makeCode(window.location.host+window.location.pathname.replace("index","client")+"?appid="+APPID+"&auth="+APPKEY+":"+APPSECRET);
+		makeCode("http://"+window.location.host+window.location.pathname.replace("index","client")+"?appid="+APPID+"&auth="+APPKEY+":"+APPSECRET);
 	}else{
-		document.getElementById("nplayer").innerHTML = 'appid or auth invalid<br>'+window.location.host+window.location.pathname+'?appid=APPID&auth=KEY:SECRET';
+		document.getElementById("nplayer").innerHTML = 'appid or auth invalid<br>http://'+window.location.host+window.location.pathname+'?appid=APPID&auth=KEY:SECRET';
 	}
 
 	var microgear = Microgear.create({
