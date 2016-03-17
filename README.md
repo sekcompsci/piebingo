@@ -8,7 +8,7 @@ Bingo Game จะแบ่งส่วนของการทำงานเป
 **KEY** และ **SECERT** คือ Application Key ที่ถูกสร้างภายใต้ Application Name
 
 Server<br>
-http://rawgit.com/anunpanya/piebingo/master/server.html#APPID:KEY:SECRET<br>
+http://rawgit.com/anunpanya/piebingo/master/index.html#APPID:KEY:SECRET<br>
 ในส่วน QR Code หากต้องการเปลี่ยน url ให้แกไขที่บรรทัด 67
 
 Client<br>
