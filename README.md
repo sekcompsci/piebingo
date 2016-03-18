@@ -9,7 +9,7 @@ Bingo Game จะแบ่งส่วนของการทำงานเป
 
 Server<br>
 http://rawgit.com/anunpanya/piebingo/master/index.html#APPID:KEY:SECRET<br>
-ในส่วน QR Code หากต้องการเปลี่ยน url ให้แกไขที่บรรทัด 67
+ในส่วน QR Code หากต้องการเปลี่ยน url ให้แกไขที่บรรทัด 69
 
 Client<br>
 http://rawgit.com/anunpanya/piebingo/master/client.html#APPID:KEY:SECRET
