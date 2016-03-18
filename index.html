@@ -60,14 +60,20 @@ body {
 		qrcode.makeCode(urlText);
 	}
 
+	var appid,appkey,appsecret;
+
     if (parameters_string.length==3) {
-		const APPID = parameters_string[0];
-		const APPKEY = parameters_string[1];
-		const APPSECRET = parameters_string[2];
+		appid = parameters_string[0];
+		appkey = parameters_string[1];
+		appsecret = parameters_string[2];
 		makeCode("http://rawgit.com/anunpanya/piebingo/master/client.html#"+APPID+":"+APPKEY+":"+APPSECRET);
 	}else{
 		document.getElementById("nplayer").innerHTML = 'appid or auth invalid<br>http://'+window.location.host+window.location.pathname+'#APPID:KEY:SECRET';
 	}
+	
+	const APPID = appid;
+	const APPKEY = appkey;
+	const APPSECRET = appsecret;
 
 	var microgear = Microgear.create({
 		gearkey: APPKEY,

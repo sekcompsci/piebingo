@@ -55,15 +55,22 @@ BINGO GAME
 
 <script>
     var parameters_string = location.hash.substring(1).split(':');
+
+	var appid,appkey,appsecret;
+
     if (parameters_string.length==3) {
-		const APPID = parameters_string[0];
-		const APPKEY = parameters_string[1];
-		const APPSECRET = parameters_string[2];
+		appid = parameters_string[0];
+		appkey = parameters_string[1];
+		appsecret = parameters_string[2];
 
 		var playername = prompt("Please enter your name", "");
 	}else{
 		document.getElementById("checkNumber").innerHTML = 'appid or auth invalid<br>http://'+window.location.host+window.location.pathname+'#APPID:KEY:SECRET';
 	}
+	
+	const APPID = appid;
+	const APPKEY = appkey;
+	const APPSECRET = appsecret;
 
 	var microgear = Microgear.create({
 		gearkey: APPKEY,
