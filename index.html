@@ -26,6 +26,19 @@ body {
 	#nlast{
 		font-size:250px;	
 	}
+	#onstart{
+		display: inline;
+	}
+	#onstop{
+		display: inline;
+	}
+	#ctrlsys{
+		text-align: center; 
+		position: absolute; 
+		bottom: 10px; 
+		right: 10px; 
+		width: 200px;
+	}
 </style>
 
 <p id="status_connect"><font style="color:#c0c0c0">Offline</font></p>
@@ -84,10 +97,10 @@ body {
 	var serverStartCountdown;
 	var serverStartBingo; 
 
-	var playerMax = 20;
+	var playerMax = 0;
 	var rage = 50;
 	var timespeed = 5000;
-	var time=15;
+	var time=5;
 
 	var start = 0;
 	var myName="";
@@ -241,10 +254,11 @@ body {
 		if(msg[0]=="client" && typeof(msg[1])=="string" && start==0){
 			if(client.indexOf(msg[1])==-1){
 				clearInterval(serverStartCountdown);
-				time=15;
+				time=5;
 				client.push(msg[1]);
 				document.getElementById("displays").style.display = "block";
 				document.getElementById("nplayer").innerHTML = client.length+" Player";
+			    //document.getElementById("ctrlsys").style.display = "block";
 
 				var arr_client = msg[2].split(',');
 				var arr = [];
@@ -266,9 +280,9 @@ body {
 				bingoClients.push(bingoClient);
 				if (playerMax!=0 && client.length == playerMax) time=0;
 
-				serverStartCountdown = setInterval(function(){
-					serverStartFunction();
-				},1000);
+//				serverStartCountdown = setInterval(function(){
+//					serverStartFunction();
+//				},1000);
 			}
 		}else if(msg[0]=="check" && typeof(msg[1])=="string" && start==1){
 			var result = checkClient(msg[1],msg[2]);
@@ -281,11 +295,27 @@ body {
 		}
 	});
 
+	function onStart(){
+		document.getElementById("onstop").disabled = false;
+		serverStartCountdown = setInterval(function(){
+			serverStartFunction();
+		},1000);
+	}
+
+	function onStop(){
+		time=5;
+		document.getElementById("countdown").innerHTML = "Stoped...";
+		clearInterval(serverStartCountdown);
+		document.getElementById("onstop").disabled = true;
+	}
+
 	microgear.on('connected', function() {
 		microgear.subscribe("/bingo/client");
 		console.log("Server start...");
 		document.getElementById("status_connect").innerHTML = '<font style="color:#00ff00">Online</font>';
-		if (start==0) document.getElementById("qrcode").style.display = "block";
+		if (start==0){
+			document.getElementById("qrcode").style.display = "block";
+		}
 	});
 
 	microgear.on('disconnected', function() {
@@ -300,7 +330,12 @@ body {
 		//
 	});
 	
-	microgear.resettoken(function(err) {
-		microgear.connect(APPID);
-	});
+	microgear.connect(APPID);
 </script>
+<div id="ctrlsys">
+	<div>Controller System</div>    
+	<div>
+		<button id="onstart" value="Start" onClick="onStart()">Start</button>
+		<button id="onstop" value="Stop" onClick="onStop()" disabled="true">Stop</button>
+	</div>
+</div>
