@@ -216,6 +216,8 @@ body {
 
 	function startFunction(){
 		if(start==1 && time==0 && bingoNumbers.length<rage){
+			document.getElementById("onstart").disabled = true;
+			document.getElementById("onstop").disabled = true;
 			var numrandom;
 			while(true){
 				numrandom = Math.floor((Math.random()*rage)+1);
