@@ -260,7 +260,7 @@ body {
 				client.push(msg[1]);
 				document.getElementById("displays").style.display = "block";
 				document.getElementById("nplayer").innerHTML = client.length+" Player";
-			    //document.getElementById("ctrlsys").style.display = "block";
+			    document.getElementById("onstart").disabled = false;
 
 				var arr_client = msg[2].split(',');
 				var arr = [];
@@ -298,6 +298,7 @@ body {
 	});
 
 	function onStart(){
+		document.getElementById("onstart").disabled = true;
 		document.getElementById("onstop").disabled = false;
 		serverStartCountdown = setInterval(function(){
 			serverStartFunction();
@@ -308,6 +309,7 @@ body {
 		time=5;
 		document.getElementById("countdown").innerHTML = "Stoped...";
 		clearInterval(serverStartCountdown);
+		document.getElementById("onstart").disabled = false;
 		document.getElementById("onstop").disabled = true;
 	}
 
@@ -337,7 +339,7 @@ body {
 <div id="ctrlsys">
 	<div>Controller System</div>    
 	<div>
-		<button id="onstart" value="Start" onClick="onStart()">Start</button>
+		<button id="onstart" value="Start" onClick="onStart()" disabled="true">Start</button>
 		<button id="onstop" value="Stop" onClick="onStop()" disabled="true">Stop</button>
 	</div>
 </div>
