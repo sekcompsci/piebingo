@@ -46,28 +46,47 @@ body {
 <button onclick="settime()">Reset Time</button>
 <script>
     var parameters_string = location.hash.substring(1).split(':');
+	var appid,appkey,appsecret,authshortapi;
 
 	function makeCode (urlText) {
-		var sizeQR = 200;
-		var qrcode = new QRCode(document.getElementById("qrcode-img"), {
-			width : sizeQR,
-			height : sizeQR
-		});	
-				
 		if (!urlText) {
 			console.log("cannot generate qr code, url is null.");
 			return;
 		}
-		qrcode.makeCode(urlText);
+
+		var sizeQR = 300;
+		var qrcode = new QRCode(document.getElementById("qrcode-img"), {
+			width : sizeQR,
+			height : sizeQR
+		});
+
+		if(parameters_string.length==4){
+			try{
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						console.log(JSON.parse(this.responseText).id);
+						if(JSON.parse(this.responseText).id!="") qrcode.makeCode(JSON.parse(this.responseText).id);
+					}
+				};
+				xhttp.open("POST", "https://www.googleapis.com/urlshortener/v1/url?key="+authshortapi, true);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send('{"longUrl": "'+urlText+'"}');
+			}catch(err){
+				console.log(err);
+			}					
+		}else{
+			console.log(urlText);
+			qrcode.makeCode(urlText);
+		}
 	}
 
-	var appid,appkey,appsecret;
-
-    if (parameters_string.length==3) {
+    if (parameters_string.length==3 || parameters_string.length==4) {
 		appid = parameters_string[0];
 		appkey = parameters_string[1];
 		appsecret = parameters_string[2];
-		makeCode("https://goo.gl/bfqUwV");
+		if(parameters_string.length==4) authshortapi = parameters_string[3];
+		makeCode("http://rawgit.com/anunpanya/piebingo/master/client.html#"+appid+":"+appkey+":"+appsecret);
 	}else{
 		document.getElementById("nplayer").innerHTML = 'appid or auth invalid<br>http://'+window.location.host+window.location.pathname+'#APPID:KEY:SECRET';
 	}
