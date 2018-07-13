@@ -69,7 +69,7 @@ body {
 						if(JSON.parse(this.responseText).id!="") qrcode.makeCode(JSON.parse(this.responseText).id);
 					}
 				};
-				xhttp.open("GET", "https://www.googleapis.com/urlshortener/v1/url?key="+authshortapi, true);
+				xhttp.open("POST", "https://www.googleapis.com/urlshortener/v1/url?key="+authshortapi, true);
 				xhttp.setRequestHeader("Content-type", "application/json");
 				xhttp.send('{"longUrl": "'+urlText+'"}');
 			}catch(err){
