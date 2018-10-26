@@ -6,9 +6,10 @@ Bingo Game จะแบ่งส่วนของการทำงานเป
 รัน server ทำงานก่อน client <br>
 **APPID** คือ Application Name ที่สร้างไว้<br>
 **KEY** และ **SECERT** คือ Application Key ที่ถูกสร้างภายใต้ Application Name
+**TOKENAPI** คือ key accesstoken google api
 
 Server<br>
-http://rawgit.com/anunpanya/piebingo/master/index.html#APPID:KEY:SECRET<br>
+http://rawgit.com/anunpanya/piebingo/master/index.html#APPID:KEY:SECRET:TOKENAPI<br>
 ในส่วน QR Code หากต้องการเปลี่ยน url ให้แกไขที่บรรทัด 69
 
 Client<br>
