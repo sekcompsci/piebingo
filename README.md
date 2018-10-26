@@ -14,3 +14,6 @@ http://rawgit.com/anunpanya/piebingo/master/index.html#APPID:KEY:SECRET:TOKENAPI
 
 Client<br>
 http://rawgit.com/anunpanya/piebingo/master/client.html#APPID:KEY:SECRET
+
+
+*** TOKENAPI  ไม่สามารถใช้งานได้แล้ว ใช้เป็น #APPID:KEY:SECRET เท่านั้น ***
